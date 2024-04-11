@@ -1,0 +1,182 @@
+---
+title: "R_Markdown_Tutorial"
+author: "Seongmin Mun"
+date: "12/04/2024"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+#### R마크다운은 3가지 요소로 구성됩니다. YAML, Text, Code
+
+구성|내용
+---|---
+YAML|모양, 기본 구조, 출력 폼 등
+Text|기본 문장, 워드 등과 동일
+Code|R code
+
+
+### 0. Markdown Basic
+
+
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+
+endash: --
+
+emdash: ---
+
+ellipsis: ...
+
+inline equation: $A = \pi*r^{2}$
+
+horizontal rule (or slide break):
+
+***
+
+> block quote
+
+* unordered list
+* item 2
+
+
++ sub-item 1
++ sub-item 2
+
+
+1. ordered list
+2. item 2
+
+
++ sub-item 1
++ sub-item 2
+
+
+Table Header | Second Header
+------------- | -------------
+Table Cell | Cell 2
+Cell 3 | Cell 4
+
+```
+# Header 1
+## Header 2
+### Header 3
+#### Header 4
+##### Header 5
+###### Header 6
+endash: --
+emdash: ---
+ellipsis: ...
+inline equation: $A = \pi*r^{2}$
+horizontal rule (or slide break):
+***
+> block quote
+* unordered list
+* item 2
++ sub-item 1
++ sub-item 2
+1. ordered list
+2. item 2
++ sub-item 1
++ sub-item 2
+Table Header | Second Header
+------------- | -------------
+Table Cell | Cell 2
+Cell 3 | Cell 4
+```
+
+
+
+### 1. Code Chunks
+
+결과와 코드를 모두 보여준다.
+```{r cars}
+summary(cars)
+```
+
+
+`include = FALSE`: 결과와 코드를 모두 안보여준다.
+
+```{r carsSpeed, include = FALSE}
+plot(cars$speed)
+```
+
+
+`echo=FALSE`: 코드는 가리고 결과만을 보여준다.
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+`fig.cap = "..."`: 그림의 캡션을 생성한다.
+
+```{r carsDist, fig.cap = "Figure 1. 그림에 대한 설명을 입력"}
+plot(cars$dist)
+```
+
+
+
+
+
+### 2. Inline Code
+
+Color에 대한 변수 생성
+```{r color, include=FALSE}
+colorFunc <- "heat.colors"
+# colorFunc <- "terrain.colors"
+```
+
+변수에 접근하여 보고서를 작성할 수 있다.
+
+#### `r colorFunc`
+
+```{r volcano, echo=FALSE}
+image(volcano, col = get(colorFunc)(200))
+```
+
+
+
+
+
+
+### 3. Tables
+
+여러 언어를 다 사용할 수 있다.
+
+#### Code를 이용해서 테이블 만들기
+
+<!-- # ```{r setupDT, include=FALSE} -->
+<!-- # library(DT) -->
+<!-- # ``` -->
+<!-- #  -->
+<!-- # ```{r table1} -->
+<!-- # fruit<-data.frame("fruit" = c("apple", "orange", "mango"),  -->
+<!-- #                   "taste" = c("delicious", "lovely", "Wow!")) -->
+<!-- # DT::datatable(fruit) -->
+<!-- # ``` -->
+
+```{r table2}
+library(knitr)
+kable(mtcars[1:5,], caption = "Figure 1. 설명을 입력하시오.")
+```
+
+#### Text를 이용해서 테이블 만들기
+
+fruit|taste
+---|---
+apple|delicious
+orange|lovely
+mango|Wow!
+
+
+
